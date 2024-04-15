@@ -13,9 +13,16 @@ with open("/Users/eriklp/code/localgpt/prompts.json") as file:
     prompt = json.load(file)["english"]
 
 
-def claude_completion(instruction, user_message):
+def get_model(model_name):
+    if model_name == "haiku":
+        return "claude-3-haiku-20240307"
+    else:
+        return None
+
+
+def claude_completion(instruction, user_message, model_name):
     completion = client.messages.create(
-        model="claude-3-haiku-20240307",
+        model=get_model(model_name),
         max_tokens=2000,
         temperature=0,
         system=prompt["system"],

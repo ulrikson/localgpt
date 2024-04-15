@@ -12,7 +12,14 @@ with open("/Users/eriklp/code/localgpt/prompts.json") as file:
     prompt = json.load(file)
 
 
-def chatgpt_completion(instruction, user_message):
+def get_model(model_name):
+    if model_name == "gpt-4":
+        return "gpt-4-turbo-preview"
+    else:
+        return None
+
+
+def chatgpt_completion(instruction, user_message, model_name="gpt-4"):
     # Define the chat conversation
     conversation = [
         {
@@ -29,7 +36,7 @@ def chatgpt_completion(instruction, user_message):
 
     # Call the OpenAI API for chat completion
     completion = client.chat.completions.create(
-        model="gpt-4-turbo-preview", messages=conversation, temperature=0.5
+        model=get_model(model_name), messages=conversation, temperature=0.5
     )
 
     # Extract and return the generated reply

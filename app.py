@@ -5,8 +5,8 @@ from claude import claude_completion
 from perplexity import perplexity_completion
 
 
-MODELS = ["chatgpt", "claude", "sonar", "mistral", "codellama", "mixtral"]
-DEFAULT_MODEL = "chatgpt"
+MODELS = ["gpt-4", "haiku", "sonar", "mistral", "codellama", "mixtral"]
+DEFAULT_MODEL = "gpt-4"
 
 
 class TextEntry:
@@ -66,12 +66,12 @@ class MainWindow:
         input_text = self.input_entry.get_text()
 
         model_functions = {
-            "claude": claude_completion,
+            "haiku": claude_completion,
             "sonar": perplexity_completion,
             "mistral": perplexity_completion,
             "codellama": perplexity_completion,
             "mixtral": perplexity_completion,
-            "chatgpt": chatgpt_completion,
+            "gpt-4": chatgpt_completion,
         }
 
         selected_model = self.model_selector.get()
