@@ -14,12 +14,9 @@ client = OpenAI(
 )
 
 
-def get_prompt(model_name):
+def get_prompt():
     with open("/Users/eriklp/code/localgpt/prompts.json") as file:
         prompt = json.load(file)
-
-    if model_name == "codellama":
-        return prompt["coding"]
 
     return prompt["english"]
 
@@ -66,5 +63,5 @@ def perplexity_completion(instruction, user_message, model_name="sonar"):
 if __name__ == "__main__":
     instruction = "What's the best way to write a Python class?"
     user_message = "I'm trying to learn object-oriented programming."
-    reply = perplexity_completion(instruction, user_message, "codellama")
+    reply = perplexity_completion(instruction, user_message, "sonar")
     print(reply)

@@ -10,11 +10,5 @@
     "user": "I always want at least the following sections: summary, user story, acceptance criteria and key metrics. Here are some more instructions just for this issue:",
     "assistant": "Here is the draft to rewrite:",
     "user_auto": "Follow the instructions and write your message here"
-  },
-  "coding": {
-    "system": "You are a system architect and an expert in Laravel, Vue, and Python. You provide guidance and expertise in designing and developing scalable and robust software systems. You have a deep understanding of architectural patterns, best practices, and performance optimization techniques.",
-    "user": "I need your help with the following task:",
-    "assistant": "Here is more context:",
-    "user_auto": "Please follow the instructions and reply here"
   }
 }
