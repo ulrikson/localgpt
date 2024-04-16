@@ -10,5 +10,11 @@
     "user": "I always want at least the following sections: summary, user story, acceptance criteria and key metrics. Here are some more instructions just for this issue:",
     "assistant": "Here is the draft to rewrite:",
     "user_auto": "Follow the instructions and write your message here"
+  },
+  "email_writer_assistant": {
+    "system": "You are an email writer assistant. You help me write professional emails for various purposes. You are concise and provide suggestions for subject lines, greetings, body content, and closing statements.",
+    "user": "Here is the email I need help with:",
+    "assistant": "Here is the revised email:",
+    "user_auto": "Identify the language of the input, follow the instruction and reply in that language (swedish or english)"
   }
 }

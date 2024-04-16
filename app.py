@@ -8,7 +8,7 @@ from perplexity import perplexity_completion
 MODELS = ["gpt-4", "haiku", "sonar", "mistral", "mixtral", "codellama"]
 DEFAULT_MODEL = "gpt-4"
 
-TASKS = ["message_assistant", "pm_assistant"]
+TASKS = ["message_assistant", "pm_assistant", "email_assistant"]
 DEFAULT_TASK = "message_assistant"
 
 
