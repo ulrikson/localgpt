@@ -49,21 +49,19 @@ class MainWindow:
         input_frame.pack(pady=(5, 10), padx=(25, 25))
 
         # Model selector
-        self.model_selector = ttk.Combobox(input_frame, values=MODELS)
-        self.model_selector.set(DEFAULT_MODEL)  # Set the default value
-        self.model_selector.grid(
-            row=0, column=0, padx=(0, 10)
-        )  # Place in the left column
-
-        # Task selector
-        self.task_selector = ttk.Combobox(input_frame, values=TASKS)
-        self.task_selector.set(DEFAULT_TASK)  # Set the default value
-        self.task_selector.grid(row=0, column=1)  # Place in the right column
+        self.model_selector = ttk.Combobox(input_frame, values=MODELS, width=7)
+        self.model_selector.set(DEFAULT_MODEL) 
+        self.model_selector.grid(row=0, column=0, padx=(0, 10))
 
         # Language selector
-        self.language_selector = ttk.Combobox(input_frame, values=LANGUAGES)
+        self.language_selector = ttk.Combobox(input_frame, values=LANGUAGES, width=7)
         self.language_selector.set(DEFAULT_LANGUAGE)
-        self.language_selector.grid(row=0, column=2)
+        self.language_selector.grid(row=0, column=1, padx=(0, 10))
+
+        # Task selector
+        self.task_selector = ttk.Combobox(input_frame, values=TASKS, width=14)
+        self.task_selector.set(DEFAULT_TASK) 
+        self.task_selector.grid(row=0, column=2)
 
         # Create a frame to hold the buttons
         button_frame = tk.Frame(self.window)
