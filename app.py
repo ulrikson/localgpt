@@ -5,6 +5,7 @@ from claude import claude_completion
 from perplexity import perplexity_completion
 
 # todo: classes for each model, lots of repetition and shared code
+# todo: stream response from api
 
 MODELS = ["gpt-4", "haiku", "sonar", "mistral", "mixtral", "codellama"]
 DEFAULT_MODEL = "gpt-4"
