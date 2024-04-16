@@ -14,11 +14,11 @@ client = OpenAI(
 )
 
 
-def get_prompt(task):
+def get_prompt(task, language):
     with open("/Users/eriklp/code/localgpt/prompts.json") as file:
         prompt = json.load(file)
 
-    return prompt[task]
+    return prompt[language][task]
 
 
 def get_model(model_name):
@@ -33,8 +33,8 @@ def get_model(model_name):
         return "mixtral-8x7b-instruct"
 
 
-def perplexity_completion(instruction, user_message, model_name="sonar", task="message_assistant"):
-    prompt = get_prompt(task)
+def perplexity_completion(instruction, user_message, model_name="sonar", task="message_assistant", language="swedish"):
+    prompt = get_prompt(task, language)
 
     # Define the chat conversation
     conversation = [

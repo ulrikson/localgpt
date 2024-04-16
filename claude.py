@@ -10,11 +10,11 @@ client = anthropic.Anthropic(
 )
 
 
-def get_prompt(task):
+def get_prompt(task, language):
     with open("/Users/eriklp/code/localgpt/prompts.json") as file:
         prompt = json.load(file)
 
-    return prompt[task]
+    return prompt[language][task]
 
 
 def get_model(model_name):
@@ -24,8 +24,10 @@ def get_model(model_name):
         return None
 
 
-def claude_completion(instruction, user_message, model_name, task="message_assistant"):
-    prompt = get_prompt(task)
+def claude_completion(
+    instruction, user_message, model_name, task="message_assistant", language="swedish"
+):
+    prompt = get_prompt(task, language)
 
     completion = client.messages.create(
         model=get_model(model_name),

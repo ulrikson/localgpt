@@ -4,12 +4,16 @@ from chatgpt import chatgpt_completion
 from claude import claude_completion
 from perplexity import perplexity_completion
 
+# todo: classes for each model, lots of repetition and shared code
 
 MODELS = ["gpt-4", "haiku", "sonar", "mistral", "mixtral", "codellama"]
 DEFAULT_MODEL = "gpt-4"
 
 TASKS = ["message_assistant", "pm_assistant", "email_assistant"]
 DEFAULT_TASK = "message_assistant"
+
+LANGUAGES = ["swedish", "english"]
+DEFAULT_LANGUAGE = "swedish"
 
 
 class TextEntry:
@@ -41,20 +45,25 @@ class MainWindow:
         self.input_entry = TextEntry(self.window, "Input Text:", 100, 5)
 
         # Create a frame to hold the comboboxes
-        combobox_frame = tk.Frame(self.window)
-        combobox_frame.pack(pady=(5, 10), padx=(25, 25))
+        input_frame = tk.Frame(self.window)
+        input_frame.pack(pady=(5, 10), padx=(25, 25))
 
         # Model selector
-        self.model_selector = ttk.Combobox(combobox_frame, values=MODELS)
+        self.model_selector = ttk.Combobox(input_frame, values=MODELS)
         self.model_selector.set(DEFAULT_MODEL)  # Set the default value
         self.model_selector.grid(
             row=0, column=0, padx=(0, 10)
         )  # Place in the left column
 
         # Task selector
-        self.task_selector = ttk.Combobox(combobox_frame, values=TASKS)
+        self.task_selector = ttk.Combobox(input_frame, values=TASKS)
         self.task_selector.set(DEFAULT_TASK)  # Set the default value
         self.task_selector.grid(row=0, column=1)  # Place in the right column
+
+        # Language selector
+        self.language_selector = ttk.Combobox(input_frame, values=LANGUAGES)
+        self.language_selector.set(DEFAULT_LANGUAGE)
+        self.language_selector.grid(row=0, column=2)
 
         # Create a frame to hold the buttons
         button_frame = tk.Frame(self.window)
@@ -102,8 +111,9 @@ class MainWindow:
         )
 
         task_name = self.task_selector.get()
+        language = self.language_selector.get()
         output_text = completion_function(
-            instruction_text, input_text, selected_model, task_name
+            instruction_text, input_text, selected_model, task_name, language
         )
 
         self.output_entry.set_text(output_text)
