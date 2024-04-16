@@ -8,8 +8,11 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-with open("/Users/eriklp/code/localgpt/prompts.json") as file:
-    prompt = json.load(file)
+def get_prompt(task):
+    with open("/Users/eriklp/code/localgpt/prompts.json") as file:
+        prompt = json.load(file)
+
+    return prompt[task]
 
 
 def get_model(model_name):
@@ -19,19 +22,23 @@ def get_model(model_name):
         return None
 
 
-def chatgpt_completion(instruction, user_message, model_name="gpt-4"):
+def chatgpt_completion(
+    instruction, user_message, model_name="gpt-4", task="message_assistant"
+):
+    prompt = get_prompt(task)
+
     # Define the chat conversation
     conversation = [
         {
             "role": "system",
-            "content": prompt["swedish"]["system"],
+            "content": prompt["system"],
         },
-        {"role": "user", "content": f"{prompt['swedish']['user']} {instruction}"},
+        {"role": "user", "content": f"{prompt['user']} {instruction}"},
         {
             "role": "assistant",
-            "content": f"{prompt['swedish']['assistant']} {user_message}",
+            "content": f"{prompt['assistant']} {user_message}",
         },
-        {"role": "user", "content": prompt["swedish"]["user_auto"]},
+        {"role": "user", "content": prompt["user_auto"]},
     ]
 
     # Call the OpenAI API for chat completion

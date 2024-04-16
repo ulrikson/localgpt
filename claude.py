@@ -9,8 +9,12 @@ client = anthropic.Anthropic(
     api_key=os.getenv("ANTHROPIC_API_KEY"),
 )
 
-with open("/Users/eriklp/code/localgpt/prompts.json") as file:
-    prompt = json.load(file)["english"]
+
+def get_prompt(task):
+    with open("/Users/eriklp/code/localgpt/prompts.json") as file:
+        prompt = json.load(file)
+
+    return prompt[task]
 
 
 def get_model(model_name):
@@ -20,7 +24,9 @@ def get_model(model_name):
         return None
 
 
-def claude_completion(instruction, user_message, model_name):
+def claude_completion(instruction, user_message, model_name, task="message_assistant"):
+    prompt = get_prompt(task)
+
     completion = client.messages.create(
         model=get_model(model_name),
         max_tokens=2000,

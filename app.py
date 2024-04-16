@@ -8,6 +8,9 @@ from perplexity import perplexity_completion
 MODELS = ["gpt-4", "haiku", "sonar", "mistral", "mixtral", "codellama"]
 DEFAULT_MODEL = "gpt-4"
 
+TASKS = ["message_assistant", "pm_assistant"]
+DEFAULT_TASK = "message_assistant"
+
 
 class TextEntry:
     def __init__(self, window, label_text, width, height):
@@ -37,10 +40,19 @@ class MainWindow:
         self.instruction_entry = TextEntry(self.window, "Instruction:", 100, 2)
         self.input_entry = TextEntry(self.window, "Input Text:", 100, 5)
 
+        # Create a frame to hold the comboboxes
+        combobox_frame = tk.Frame(self.window)
+        combobox_frame.pack(pady=(5, 10), padx=(25, 25))
+
         # Model selector
-        self.model_selector = ttk.Combobox(self.window, values=MODELS)
+        self.model_selector = ttk.Combobox(combobox_frame, values=MODELS)
         self.model_selector.set(DEFAULT_MODEL)  # Set the default value
-        self.model_selector.pack(pady=(5, 10), padx=(25, 25))
+        self.model_selector.grid(row=0, column=0, padx=(0, 10))  # Place in the left column
+
+        # Task selector
+        self.task_selector = ttk.Combobox(combobox_frame, values=TASKS)
+        self.task_selector.set(DEFAULT_TASK)  # Set the default value
+        self.task_selector.grid(row=0, column=1)  # Place in the right column
 
         # Process button
         self.process_button = tk.Button(
@@ -78,7 +90,9 @@ class MainWindow:
         completion_function = model_functions.get(
             selected_model, "Model not supported..."
         )
-        output_text = completion_function(instruction_text, input_text, selected_model)
+
+        task_name = self.task_selector.get()
+        output_text = completion_function(instruction_text, input_text, selected_model, task_name)
 
         self.output_entry.set_text(output_text)
 
