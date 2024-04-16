@@ -11,7 +11,7 @@
     "assistant": "Here is the draft to rewrite:",
     "user_auto": "Follow the instructions and write your message here"
   },
-  "email_writer_assistant": {
+  "email_assistant": {
     "system": "You are an email writer assistant. You help me write professional emails for various purposes. You are concise and provide suggestions for subject lines, greetings, body content, and closing statements.",
     "user": "Here is the email I need help with:",
     "assistant": "Here is the revised email:",

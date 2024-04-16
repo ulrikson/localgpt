@@ -47,31 +47,41 @@ class MainWindow:
         # Model selector
         self.model_selector = ttk.Combobox(combobox_frame, values=MODELS)
         self.model_selector.set(DEFAULT_MODEL)  # Set the default value
-        self.model_selector.grid(row=0, column=0, padx=(0, 10))  # Place in the left column
+        self.model_selector.grid(
+            row=0, column=0, padx=(0, 10)
+        )  # Place in the left column
 
         # Task selector
         self.task_selector = ttk.Combobox(combobox_frame, values=TASKS)
         self.task_selector.set(DEFAULT_TASK)  # Set the default value
         self.task_selector.grid(row=0, column=1)  # Place in the right column
 
+        # Create a frame to hold the buttons
+        button_frame = tk.Frame(self.window)
+        button_frame.pack(pady=(5, 10), padx=(25, 25))
+
         # Process button
         self.process_button = tk.Button(
-            self.window, text="Process", command=self.process_text
+            button_frame, text="Process", command=self.process_text
         )
-        self.process_button.pack(pady=(5, 5), padx=(25, 25))
+        self.process_button.grid(
+            row=0, column=0, padx=(0, 10)
+        )  # Place in the left column
 
         # Copy button
-        self.copy_button = tk.Button(self.window, text="Copy", command=self.copy_text)
-        self.copy_button.pack(pady=(5, 5), padx=(25, 25))
-
-        # Output text
-        self.output_entry = TextEntry(self.window, "Output:", 100, 20)
+        self.copy_button = tk.Button(button_frame, text="Copy", command=self.copy_text)
+        self.copy_button.grid(
+            row=0, column=1, padx=(0, 10)
+        )  # Place in the middle column
 
         # Clear button
         self.clear_button = tk.Button(
-            self.window, text="Clear", command=self.clear_text
+            button_frame, text="Clear", command=self.clear_text
         )
-        self.clear_button.pack(pady=(5, 25), padx=(25, 25))
+        self.clear_button.grid(row=0, column=2)  # Place in the right column
+
+        # Output text
+        self.output_entry = TextEntry(self.window, "Output:", 100, 20)
 
     def process_text(self):
         instruction_text = self.instruction_entry.get_text()
@@ -92,7 +102,9 @@ class MainWindow:
         )
 
         task_name = self.task_selector.get()
-        output_text = completion_function(instruction_text, input_text, selected_model, task_name)
+        output_text = completion_function(
+            instruction_text, input_text, selected_model, task_name
+        )
 
         self.output_entry.set_text(output_text)
 
