@@ -5,7 +5,7 @@ from claude import claude_completion
 from perplexity import perplexity_completion
 
 
-MODELS = ["gpt-4", "haiku", "sonar", "mistral", "codellama", "mixtral"]
+MODELS = ["gpt-4", "haiku", "sonar", "mistral", "mixtral", "codellama"]
 DEFAULT_MODEL = "gpt-4"
 
 

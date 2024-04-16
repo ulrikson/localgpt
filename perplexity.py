@@ -13,8 +13,15 @@ client = OpenAI(
     base_url="https://api.perplexity.ai",
 )
 
-with open("/Users/eriklp/code/localgpt/prompts.json") as file:
-    prompt = json.load(file)["english"]
+
+def get_prompt(model_name):
+    with open("/Users/eriklp/code/localgpt/prompts.json") as file:
+        prompt = json.load(file)
+
+    if model_name == "codellama":
+        return prompt["coding"]
+
+    return prompt["english"]
 
 
 def get_model(model_name):
@@ -30,6 +37,8 @@ def get_model(model_name):
 
 
 def perplexity_completion(instruction, user_message, model_name="sonar"):
+    prompt = get_prompt(model_name)
+
     # Define the chat conversation
     conversation = [
         {
@@ -55,7 +64,7 @@ def perplexity_completion(instruction, user_message, model_name="sonar"):
 
 
 if __name__ == "__main__":
-    instruction = "Help me write a Jira ticket for a bug."
-    user_message = "One user, David, is really slow to load the page."
-    reply = perplexity_completion(instruction, user_message)
+    instruction = "What's the best way to write a Python class?"
+    user_message = "I'm trying to learn object-oriented programming."
+    reply = perplexity_completion(instruction, user_message, "codellama")
     print(reply)
