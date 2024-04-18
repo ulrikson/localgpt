@@ -24,6 +24,19 @@ def get_model(model_name):
         return None
 
 
+def get_token_cost(response, model_name):
+    tokens = response.usage
+    input = tokens.prompt_tokens
+    output = tokens.completion_tokens
+
+    if model_name == "gpt-4":
+        cost = 10 * (30 * input + 60 * output) / 1000000  # SEK
+    else:
+        cost = 10 * (0.50 * input + 1.50 * output) / 1000000  # SEK
+
+    return f"Cost: {cost:.3f} SEK ({input} input tokens, {output} output tokens)"
+
+
 def chatgpt_completion(
     instruction,
     user_message,
@@ -52,13 +65,19 @@ def chatgpt_completion(
         model=get_model(model_name), messages=conversation, temperature=0.5
     )
 
-    # Extract and return the generated reply
+    tokens = get_token_cost(completion, model_name)
     reply = completion.choices[0].message.content
-    return reply
+    return f"{reply}\n\n{tokens}"
 
 
 if __name__ == "__main__":
     instruction = "Min kollega har rapporterat en bugg i Slack som jag behöver mer info om. jag ska svara i en tråd. hjälp mig skriva om mitt utkast"
     user_message = "du skriver att det är en bugg vilket får mig att tro att nåt inte funkar, samtidigt verkar det på bilden som att det snarare är att popupen syns men inte där du tänkt. hur är det"
-    reply = chatgpt_completion(instruction, user_message)
+    reply = chatgpt_completion(
+        instruction,
+        user_message,
+        model_name="gpt-3.5",
+        task="message_assistant",
+        language="swedish",
+    )
     print(reply)
