@@ -4,9 +4,6 @@ from chatgpt import chatgpt_completion
 from claude import claude_completion
 from perplexity import perplexity_completion
 
-# todo: classes for each model, lots of repetition and shared code
-# todo: stream response from api
-
 MODELS = ["gpt-4", "haiku", "sonar", "mistral", "mixtral", "codellama"]
 DEFAULT_MODEL = "gpt-4"
 
@@ -51,7 +48,7 @@ class MainWindow:
 
         # Model selector
         self.model_selector = ttk.Combobox(input_frame, values=MODELS, width=7)
-        self.model_selector.set(DEFAULT_MODEL) 
+        self.model_selector.set(DEFAULT_MODEL)
         self.model_selector.grid(row=0, column=0, padx=(0, 10))
 
         # Language selector
@@ -61,7 +58,7 @@ class MainWindow:
 
         # Task selector
         self.task_selector = ttk.Combobox(input_frame, values=TASKS, width=14)
-        self.task_selector.set(DEFAULT_TASK) 
+        self.task_selector.set(DEFAULT_TASK)
         self.task_selector.grid(row=0, column=2)
 
         # Create a frame to hold the buttons
