@@ -6,7 +6,7 @@ from helper import PromptHelper
 load_dotenv()
 
 client = anthropic.Anthropic(
-    api_key=os.getenv("ANTHROPIC_API_KEY"),
+    api_key=os.getenv("ANTHROPIC_PERSONAL_API_KEY"),
 )
 
 
