@@ -10,17 +10,6 @@ client = anthropic.Anthropic(
 )
 
 
-def get_model(model_name):
-    if model_name == "haiku":
-        return "claude-3-haiku-20240307"
-    elif model_name == "sonnet":
-        return "claude-3-sonnet-20240229"
-    elif model_name == "opus":
-        return "claude-3-opus-20240229"
-    else:
-        return None
-
-
 def get_token_cost(response, model_name):
     tokens = response.usage
     input = tokens.input_tokens
@@ -40,9 +29,10 @@ def claude_completion(
     instruction, user_message, model_name, task="message_assistant", language="swedish"
 ):
     prompt = PromptHelper.get_prompt(task, language)
+    model = PromptHelper.get_model(model_name)
 
     completion = client.messages.create(
-        model=get_model(model_name),
+        model=model,
         max_tokens=2000,
         temperature=0,
         system=prompt["system"],

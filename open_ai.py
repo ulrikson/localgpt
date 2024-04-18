@@ -9,18 +9,6 @@ class OpenAIClient:
         self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.model_name = model_name
 
-    def get_model(self):
-        model_mapping = {
-            "gpt-4": "gpt-4-turbo-preview",
-            "gpt-3.5": "gpt-3.5-turbo",
-            "sonar": "sonar-small-chat",
-            "mistral": "mistral-7b-instruct",
-            "codellama": "codellama-70b-instruct",
-            "mixtral": "mixtral-8x22b-instruct",
-        }
-
-        return model_mapping.get(self.model_name, None)
-
     def get_token_cost(self, response):
         tokens = response.usage
         input = tokens.prompt_tokens
@@ -40,10 +28,9 @@ class OpenAIClient:
         cost = usd_to_sek * (input_cost * input + output_cost * output) / 1000000
         return f"{cost:.3f} SEK ({input} input tokens, {output} output tokens)"
 
-    def completion(
-        self, instruction, user_message, task="message_assistant", language="swedish"
-    ):
+    def completion(self, instruction, user_message, task, language):
         prompt = PromptHelper.get_prompt(task, language)
+        model = PromptHelper.get_model(self.model_name)
 
         # Define the chat conversation
         conversation = [
@@ -55,7 +42,7 @@ class OpenAIClient:
 
         # Call the OpenAI API for chat completion
         completion = self.client.chat.completions.create(
-            model=self.get_model(), messages=conversation, temperature=0.5
+            model=model, messages=conversation
         )
 
         tokens = self.get_token_cost(completion)
