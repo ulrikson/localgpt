@@ -9,25 +9,6 @@ class OpenAIClient:
         self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.model_name = model_name
 
-    def get_token_cost(self, response):
-        tokens = response.usage
-        input = tokens.prompt_tokens
-        output = tokens.completion_tokens
-
-        model_costs = {
-            "gpt-4": (10, 30),
-            "gpt-3.5": (0.50, 1.50),
-            "sonar": (0.20, 0.20),
-            "mistral": (0.20, 0.20),
-            "codellama": (1, 1),
-            "mixtral": (1, 1),
-        }
-
-        input_cost, output_cost = model_costs[self.model_name]
-        usd_to_sek = 10.0
-        cost = usd_to_sek * (input_cost * input + output_cost * output) / 1000000
-        return f"{cost:.3f} SEK ({input} input tokens, {output} output tokens)"
-
     def completion(self, instruction, user_message, task, language):
         prompt = PromptHelper.get_prompt(task, language)
         model = PromptHelper.get_model(self.model_name)
@@ -45,7 +26,11 @@ class OpenAIClient:
             model=model, messages=conversation
         )
 
-        tokens = self.get_token_cost(completion)
+        tokens = PromptHelper.get_token_cost(
+            completion.usage.prompt_tokens,
+            completion.usage.completion_tokens,
+            self.model_name,
+        )
         reply = completion.choices[0].message.content
         return f"\n{reply}\n\n---\n\n{tokens}"
 

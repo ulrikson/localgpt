@@ -10,21 +10,6 @@ client = anthropic.Anthropic(
 )
 
 
-def get_token_cost(response, model_name):
-    tokens = response.usage
-    input = tokens.input_tokens
-    output = tokens.output_tokens
-
-    if model_name == "haiku":
-        cost = 10 * (0.25 * input + 1.25 * output) / 1000000  # SEK
-    elif model_name == "sonnet":
-        cost = 10 * (3 * input + 15 * output) / 1000000  # SEK
-    elif model_name == "opus":
-        cost = 10 * (15 * input + 75 * output) / 1000000
-
-    return f"{cost:.3f} SEK ({input} input tokens, {output} output tokens)"
-
-
 def claude_completion(
     instruction, user_message, model_name, task="message_assistant", language="swedish"
 ):
@@ -59,7 +44,9 @@ def claude_completion(
         ],
     )
 
-    tokens = get_token_cost(completion, model_name)
+    tokens = PromptHelper.get_token_cost(
+        completion.usage.input_tokens, completion.usage.output_tokens, model_name
+    )
     reply = completion.content[0].text
     return f"\n{reply}\n\n---\n\n{tokens}"
 
