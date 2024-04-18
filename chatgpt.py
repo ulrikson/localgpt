@@ -30,11 +30,13 @@ def get_token_cost(response, model_name):
     output = tokens.completion_tokens
 
     if model_name == "gpt-4":
-        cost = 10 * (30 * input + 60 * output) / 1000000  # SEK
-    else:
+        cost = 10 * (10 * input + 30 * output) / 1000000  # SEK
+    elif model_name == "gpt-3.5":
         cost = 10 * (0.50 * input + 1.50 * output) / 1000000  # SEK
+    else:
+        return None
 
-    return f"Cost: {cost:.3f} SEK ({input} input tokens, {output} output tokens)"
+    return f"{cost:.3f} SEK ({input} input tokens, {output} output tokens)"
 
 
 def chatgpt_completion(
@@ -67,7 +69,7 @@ def chatgpt_completion(
 
     tokens = get_token_cost(completion, model_name)
     reply = completion.choices[0].message.content
-    return f"{reply}\n\n{tokens}"
+    return f"\n{reply}\n\n---\n\n{tokens}"
 
 
 if __name__ == "__main__":

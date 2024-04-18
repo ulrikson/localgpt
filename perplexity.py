@@ -33,6 +33,19 @@ def get_model(model_name):
         return "mixtral-8x22b-instruct"
 
 
+def get_token_cost(response, model_name):
+    tokens = response.usage
+    input = tokens.prompt_tokens
+    output = tokens.completion_tokens
+
+    if model_name == "sonar" or model_name == "mistral":
+        cost = 10 * 0.20 * (input + output) / 1000000  # SEK
+    elif model_name == "codellama" or model_name == "mixtral":
+        cost = 10 * 1 * (input + output) / 1000000
+
+    return f"{cost:.3f} SEK ({input} input tokens, {output} output tokens)"
+
+
 def perplexity_completion(
     instruction,
     user_message,
@@ -61,13 +74,13 @@ def perplexity_completion(
         model=get_model(model_name), messages=conversation
     )
 
-    # Extract and return the generated reply
+    tokens = get_token_cost(completion, model_name)
     reply = completion.choices[0].message.content
-    return reply
+    return f"\n{reply}\n\n---\n\n{tokens}"
 
 
 if __name__ == "__main__":
-    instruction = "What's the best way to write a Python class?"
-    user_message = "I'm trying to learn object-oriented programming."
-    reply = perplexity_completion(instruction, user_message, "sonar")
+    instruction = "Min kollega har rapporterat en bugg i Slack som jag behöver mer info om. jag ska svara i en tråd. hjälp mig skriva om mitt utkast"
+    user_message = "du skriver att det är en bugg vilket får mig att tro att nåt inte funkar, samtidigt verkar det på bilden som att det snarare är att popupen syns men inte där du tänkt. hur är det"
+    reply = perplexity_completion(instruction, user_message, "sonar", "message_assistant", "swedish")
     print(reply)
