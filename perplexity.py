@@ -30,10 +30,16 @@ def get_model(model_name):
     elif model_name == "codellama":
         return "codellama-70b-instruct"
     elif model_name == "mixtral":
-        return "mixtral-8x7b-instruct"
+        return "mixtral-8x22b-instruct"
 
 
-def perplexity_completion(instruction, user_message, model_name="sonar", task="message_assistant", language="swedish"):
+def perplexity_completion(
+    instruction,
+    user_message,
+    model_name="sonar",
+    task="message_assistant",
+    language="swedish",
+):
     prompt = get_prompt(task, language)
 
     # Define the chat conversation
