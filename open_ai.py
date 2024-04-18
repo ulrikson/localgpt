@@ -40,7 +40,8 @@ def open_ai_completion(instruction, user_message, model_name, task, language):
 if __name__ == "__main__":
     instruction = "I need help with my computer"
     user_message = "My computer is not working"
-    task = "message_assistant"
-    language = "swedish"
-    model_name = "gpt-3.5"
-    print(open_ai_completion(instruction, user_message, model_name, task, language))
+    print(
+        open_ai_completion(
+            instruction, user_message, "gpt-3.5", "message_assistant", "swedish"
+        )
+    )
