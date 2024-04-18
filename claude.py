@@ -10,9 +10,7 @@ client = anthropic.Anthropic(
 )
 
 
-def claude_completion(
-    instruction, user_message, model_name, task="message_assistant", language="swedish"
-):
+def claude_completion(instruction, user_message, model_name, task, language):
     prompt = PromptHelper.get_prompt(task, language)
     model = PromptHelper.get_model(model_name)
 
