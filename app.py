@@ -4,7 +4,17 @@ from chatgpt import chatgpt_completion
 from claude import claude_completion
 from perplexity import perplexity_completion
 
-MODELS = ["gpt-4", "haiku", "gpt-3.5", "sonar", "mistral", "mixtral", "codellama"]
+MODELS = [
+    "gpt-4",
+    "sonnet",
+    "opus",
+    "haiku",
+    "gpt-3.5",
+    "sonar",
+    "mistral",
+    "mixtral",
+    "codellama",
+]
 DEFAULT_MODEL = "gpt-4"
 
 TASKS = ["message_assistant", "pm_assistant", "email_assistant"]

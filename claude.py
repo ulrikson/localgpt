@@ -20,6 +20,10 @@ def get_prompt(task, language):
 def get_model(model_name):
     if model_name == "haiku":
         return "claude-3-haiku-20240307"
+    elif model_name == "sonnet":
+        return "claude-3-sonnet-20240229"
+    elif model_name == "opus":
+        return "claude-3-opus-20240229"
     else:
         return None
 
@@ -63,5 +67,7 @@ def claude_completion(
 if __name__ == "__main__":
     instruction = "Help me write a Jira ticket for a bug."
     user_message = "One user, David, is really slow to load the page."
-    reply = claude_completion(instruction, user_message, "haiku", "pm_assistant", "english")
+    reply = claude_completion(
+        instruction, user_message, "haiku", "pm_assistant", "english"
+    )
     print(reply)
