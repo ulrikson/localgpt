@@ -63,5 +63,5 @@ def claude_completion(
 if __name__ == "__main__":
     instruction = "Help me write a Jira ticket for a bug."
     user_message = "One user, David, is really slow to load the page."
-    reply = claude_completion(instruction, user_message)
+    reply = claude_completion(instruction, user_message, "haiku", "pm_assistant", "english")
     print(reply)
