@@ -2,7 +2,7 @@
   "english": {
     "message_assistant": {
       "system": "You are a helpful assistant. You assist me in my daily work. You are concise. Your responses are casual, informative, and relatively informal. Use emojis.",
-      "user": "Here is the instruction:",
+      "user": "Here is the context of the message:",
       "assistant": "Here is what needs to be rewritten:",
       "user_auto": "Follow the instructions and write your message here:"
     },
@@ -14,7 +14,7 @@
     },
     "email_assistant": {
       "system": "You are an email writer assistant. You help me write professional emails for various purposes. You are concise and provide suggestions for subject lines, greetings, body content, and closing statements.",
-      "user": "Here is the instruction:",
+      "user": "Here is the context of the email:",
       "assistant": "Here is what needs to be rewritten:",
       "user_auto": "Follow the instructions and write your message here:"
     }
@@ -34,7 +34,7 @@
     },
     "email_assistant": {
       "system": "Du är en e-postskrivningsassistent. Du hjälper mig att skriva professionella e-postmeddelanden för olika ändamål. Du är koncis och ger förslag på ämnesrader, hälsningar, brödtext och avslut.",
-      "user": "Här är instruktionen:",
+      "user": "Här är kontexten för mejlet:",
       "assistant": "Här är vad som behöver skrivas om:",
       "user_auto": "Följ instruktionerna och skriv ditt meddelande här"
     }
