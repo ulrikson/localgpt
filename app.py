@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from claude import claude_completion
-from open_ai import ask as ask_openai
+from open_ai import open_ai_completion
 
 MODELS = [
     "gpt-4",
@@ -16,7 +16,7 @@ MODELS = [
 ]
 DEFAULT_MODEL = "gpt-4"
 
-TASKS = ["message_assistant", "pm_assistant", "email_assistant"]
+TASKS = ["message_assistant", "pm_assistant", "email_assistant", "sales_assistant"]
 DEFAULT_TASK = "message_assistant"
 
 LANGUAGES = ["swedish", "english"]
@@ -105,12 +105,12 @@ class MainWindow:
             "haiku": claude_completion,
             "sonnet": claude_completion,
             "opus": claude_completion,
-            "sonar": ask_openai,
-            "mistral": ask_openai,
-            "codellama": ask_openai,
-            "mixtral": ask_openai,
-            "gpt-4": ask_openai,
-            "gpt-3.5": ask_openai,
+            "sonar": open_ai_completion,
+            "mistral": open_ai_completion,
+            "codellama": open_ai_completion,
+            "mixtral": open_ai_completion,
+            "gpt-4": open_ai_completion,
+            "gpt-3.5": open_ai_completion,
         }
 
         selected_model = self.model_selector.get()
