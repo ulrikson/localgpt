@@ -1,20 +1,13 @@
 import anthropic
-import json
 import os
 from dotenv import load_dotenv
+from helper import PromptHelper
 
 load_dotenv()
 
 client = anthropic.Anthropic(
     api_key=os.getenv("ANTHROPIC_API_KEY"),
 )
-
-
-def get_prompt(task, language):
-    with open("/Users/eriklp/code/localgpt/prompts.json") as file:
-        prompt = json.load(file)
-
-    return prompt[language][task]
 
 
 def get_model(model_name):
@@ -46,7 +39,7 @@ def get_token_cost(response, model_name):
 def claude_completion(
     instruction, user_message, model_name, task="message_assistant", language="swedish"
 ):
-    prompt = get_prompt(task, language)
+    prompt = PromptHelper.get_prompt(task, language)
 
     completion = client.messages.create(
         model=get_model(model_name),

@@ -1,19 +1,13 @@
 from openai import OpenAI
-import json
 import os
 from dotenv import load_dotenv
+from helper import PromptHelper
 
 
 class OpenAIClient:
     def __init__(self, api_key, base_url, model_name="gpt-4"):
         self.client = OpenAI(api_key=api_key, base_url=base_url)
         self.model_name = model_name
-
-    def get_prompt(self, task, language):
-        with open("/Users/eriklp/code/localgpt/prompts.json") as file:
-            prompt = json.load(file)
-
-        return prompt[language][task]
 
     def get_model(self):
         if self.model_name == "gpt-4":
@@ -52,7 +46,7 @@ class OpenAIClient:
     def completion(
         self, instruction, user_message, task="message_assistant", language="swedish"
     ):
-        prompt = self.get_prompt(task, language)
+        prompt = PromptHelper.get_prompt(task, language)
 
         # Define the chat conversation
         conversation = [
