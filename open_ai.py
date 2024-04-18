@@ -10,37 +10,34 @@ class OpenAIClient:
         self.model_name = model_name
 
     def get_model(self):
-        if self.model_name == "gpt-4":
-            return "gpt-4-turbo-preview"
-        elif self.model_name == "gpt-3.5":
-            return "gpt-3.5-turbo"
-        elif self.model_name == "sonar":
-            return "sonar-small-chat"
-        elif self.model_name == "mistral":
-            return "mistral-7b-instruct"
-        elif self.model_name == "codellama":
-            return "codellama-70b-instruct"
-        elif self.model_name == "mixtral":
-            return "mixtral-8x22b-instruct"
-        else:
-            return None
+        model_mapping = {
+            "gpt-4": "gpt-4-turbo-preview",
+            "gpt-3.5": "gpt-3.5-turbo",
+            "sonar": "sonar-small-chat",
+            "mistral": "mistral-7b-instruct",
+            "codellama": "codellama-70b-instruct",
+            "mixtral": "mixtral-8x22b-instruct",
+        }
+
+        return model_mapping.get(self.model_name, None)
 
     def get_token_cost(self, response):
         tokens = response.usage
         input = tokens.prompt_tokens
         output = tokens.completion_tokens
 
-        if self.model_name == "gpt-4":
-            cost = 10 * (10 * input + 30 * output) / 1000000  # SEK
-        elif self.model_name == "gpt-3.5":
-            cost = 10 * (0.50 * input + 1.50 * output) / 1000000  # SEK
-        elif self.model_name == "sonar" or self.model_name == "mistral":
-            cost = 10 * 0.20 * (input + output) / 1000000  # SEK
-        elif self.model_name == "codellama" or self.model_name == "mixtral":
-            cost = 10 * 1 * (input + output) / 1000000
-        else:
-            return None
+        model_costs = {
+            "gpt-4": (10, 30),
+            "gpt-3.5": (0.50, 1.50),
+            "sonar": (0.20, 0.20),
+            "mistral": (0.20, 0.20),
+            "codellama": (1, 1),
+            "mixtral": (1, 1),
+        }
 
+        input_cost, output_cost = model_costs[self.model_name]
+        usd_to_sek = 10.0
+        cost = usd_to_sek * (input_cost * input + output_cost * output) / 1000000
         return f"{cost:.3f} SEK ({input} input tokens, {output} output tokens)"
 
     def completion(
