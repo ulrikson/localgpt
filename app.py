@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-from chatgpt import chatgpt_completion
 from claude import claude_completion
-from perplexity import perplexity_completion
+from open_ai import ask as ask_openai
 
 MODELS = [
     "gpt-4",
@@ -104,12 +103,14 @@ class MainWindow:
 
         model_functions = {
             "haiku": claude_completion,
-            "sonar": perplexity_completion,
-            "mistral": perplexity_completion,
-            "codellama": perplexity_completion,
-            "mixtral": perplexity_completion,
-            "gpt-4": chatgpt_completion,
-            "gpt-3.5": chatgpt_completion,
+            "sonnet": claude_completion,
+            "opus": claude_completion,
+            "sonar": ask_openai,
+            "mistral": ask_openai,
+            "codellama": ask_openai,
+            "mixtral": ask_openai,
+            "gpt-4": ask_openai,
+            "gpt-3.5": ask_openai,
         }
 
         selected_model = self.model_selector.get()
