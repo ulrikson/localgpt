@@ -6,20 +6,16 @@ from helper import PromptHelper
 load_dotenv()
 
 
-def get_api_key(model_name):
+def get_api(model_name):
     if model_name == "gpt-4" or model_name == "gpt-3.5":
-        return os.getenv("OPENAI_API_KEY")
-    return os.getenv("PERPLEXITY_API_KEY")
+        return os.getenv("OPENAI_API_KEY"), "https://api.openai.com/v1"
 
-
-def get_base_url(model_name):
-    if model_name == "gpt-4" or model_name == "gpt-3.5":
-        return "https://api.openai.com/v1"
-    return "https://api.perplexity.ai"
+    return os.getenv("PERPLEXITY_API_KEY"), "https://api.perplexity.ai"
 
 
 def open_ai_completion(instruction, user_message, model_name, task, language):
-    client = OpenAI(api_key=get_api_key(model_name), base_url=get_base_url(model_name))
+    api_key, base_url = get_api(model_name)
+    client = OpenAI(api_key=api_key, base_url=base_url)
     prompt = PromptHelper.get_prompt(task, language)
     model = PromptHelper.get_model(model_name)
 
