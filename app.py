@@ -4,7 +4,7 @@ from chatgpt import chatgpt_completion
 from claude import claude_completion
 from perplexity import perplexity_completion
 
-MODELS = ["gpt-4", "haiku", "sonar", "mistral", "mixtral", "codellama"]
+MODELS = ["gpt-4", "haiku", "gpt-3.5", "sonar", "mistral", "mixtral", "codellama"]
 DEFAULT_MODEL = "gpt-4"
 
 TASKS = ["message_assistant", "pm_assistant", "email_assistant"]
@@ -99,6 +99,7 @@ class MainWindow:
             "codellama": perplexity_completion,
             "mixtral": perplexity_completion,
             "gpt-4": chatgpt_completion,
+            "gpt-3.5": chatgpt_completion,
         }
 
         selected_model = self.model_selector.get()

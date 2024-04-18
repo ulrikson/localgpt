@@ -18,6 +18,8 @@ def get_prompt(task, language):
 def get_model(model_name):
     if model_name == "gpt-4":
         return "gpt-4-turbo-preview"
+    elif model_name == "gpt-3.5":
+        return "gpt-3.5-turbo"
     else:
         return None
 
