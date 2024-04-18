@@ -5,10 +5,10 @@ from open_ai import open_ai_completion
 
 MODELS = [
     "gpt-4",
+    "gpt-3.5",
     "sonnet",
     "opus",
     "haiku",
-    "gpt-3.5",
     "sonar",
     "mistral",
     "mixtral",
