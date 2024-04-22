@@ -124,8 +124,10 @@ class MainWindow:
 
     def copy_text(self):
         output_text = self.output_entry.get_text()
+        copy_text = output_text.split("---")[0] # Remove the metadata
+
         self.output_entry.entry.clipboard_clear()
-        self.output_entry.entry.clipboard_append(output_text)
+        self.output_entry.entry.clipboard_append(copy_text)
 
     def focus_next_widget(self, event, widget):
         widget.focus_set()
