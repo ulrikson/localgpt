@@ -103,24 +103,8 @@ class MainWindow:
         instruction_text = self.instruction_entry.get_text()
         input_text = self.input_entry.get_text()
 
-        model_functions = {
-            "haiku": claude_completion,
-            "sonnet": claude_completion,
-            "opus": claude_completion,
-            "sonar": open_ai_completion,
-            "mistral": open_ai_completion,
-            "codellama": open_ai_completion,
-            "mixtral": open_ai_completion,
-            "gpt-4": open_ai_completion,
-            "gpt-3.5": open_ai_completion,
-            "llama3-8b": open_ai_completion,
-            "llama3-70b": open_ai_completion,
-        }
-
         selected_model = self.model_selector.get()
-        completion_function = model_functions.get(
-            selected_model, "Model not supported..."
-        )
+        completion_function = self.get_vendor(selected_model)
 
         task_name = self.task_selector.get()
         language = self.language_selector.get()
@@ -129,6 +113,12 @@ class MainWindow:
         )
 
         self.output_entry.set_text(output_text)
+
+    def get_vendor(self, model_name):
+        if model_name in ["haiku", "sonnet", "opus"]:
+            return claude_completion
+        else:
+            return open_ai_completion
 
     def clear_text(self):
         self.input_entry.clear_text()
