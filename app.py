@@ -5,13 +5,15 @@ from open_ai import open_ai_completion
 
 MODELS = [
     "gpt-4",
-    "gpt-3.5",
     "sonnet",
     "opus",
     "haiku",
+    "llama3-8b",
+    "llama3-70b",
+    "mixtral",
+    "gpt-3.5",
     "sonar",
     "mistral",
-    "mixtral",
     "codellama",
 ]
 DEFAULT_MODEL = "gpt-4"
@@ -111,6 +113,8 @@ class MainWindow:
             "mixtral": open_ai_completion,
             "gpt-4": open_ai_completion,
             "gpt-3.5": open_ai_completion,
+            "llama3-8b": open_ai_completion,
+            "llama3-70b": open_ai_completion,
         }
 
         selected_model = self.model_selector.get()

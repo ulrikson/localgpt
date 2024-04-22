@@ -21,6 +21,8 @@ class PromptHelper:
             "haiku": "claude-3-haiku-20240307",
             "sonnet": "claude-3-sonnet-20240229",
             "opus": "claude-3-opus-20240229",
+            "llama3-8b": "llama-3-8b-instruct",
+            "llama3-70b": "llama-3-70b-instruct",
         }
 
         return model_mapping.get(model_name, None)
@@ -34,6 +36,8 @@ class PromptHelper:
             "mistral": (0.20, 0.20),
             "codellama": (1, 1),
             "mixtral": (1, 1),
+            "llama3-8b": (0.20, 0.20),
+            "llama3-70b": (1, 1),
             "haiku": (0.25, 1.25),
             "sonnet": (3, 15),
             "opus": (15, 75),
