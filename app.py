@@ -4,25 +4,22 @@ from claude import claude_completion
 from open_ai import open_ai_completion
 
 MODELS = [
+    "llama3-8b",
     "gpt-4",
     "sonnet",
     "opus",
-    "haiku",
-    "llama3-8b",
     "llama3-70b",
     "mixtral",
+    "haiku",
     "gpt-3.5",
     "sonar",
     "mistral",
     "codellama",
 ]
-DEFAULT_MODEL = "gpt-4"
 
-TASKS = ["message_assistant", "pm_assistant", "email_assistant", "sales_assistant"]
-DEFAULT_TASK = "message_assistant"
+TASKS = ["pm_assistant", "message_assistant", "email_assistant", "sales_assistant"]
 
-LANGUAGES = ["swedish", "english"]
-DEFAULT_LANGUAGE = "swedish"
+LANGUAGES = ["english", "swedish"]
 
 
 class TextEntry:
@@ -59,17 +56,17 @@ class MainWindow:
 
         # Model selector
         self.model_selector = ttk.Combobox(input_frame, values=MODELS, width=7)
-        self.model_selector.set(DEFAULT_MODEL)
+        self.model_selector.set(MODELS[0])
         self.model_selector.grid(row=0, column=0, padx=(0, 10))
 
         # Language selector
         self.language_selector = ttk.Combobox(input_frame, values=LANGUAGES, width=7)
-        self.language_selector.set(DEFAULT_LANGUAGE)
+        self.language_selector.set(LANGUAGES[0])
         self.language_selector.grid(row=0, column=1, padx=(0, 10))
 
         # Task selector
         self.task_selector = ttk.Combobox(input_frame, values=TASKS, width=14)
-        self.task_selector.set(DEFAULT_TASK)
+        self.task_selector.set(TASKS[0])
         self.task_selector.grid(row=0, column=2)
 
         # Create a frame to hold the buttons
