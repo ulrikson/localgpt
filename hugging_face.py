@@ -1,20 +1,9 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import pipeline, set_seed
 
-model_name = "gpt2"
-model = AutoModelForCausalLM.from_pretrained(model_name)
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+generator = pipeline("text-generation", model="gpt2")
+set_seed(42)
+output = generator("Hello, I'm a language model,", max_length=30, num_return_sequences=5)
 
-prompt = "I am the"
-input_ids = tokenizer.encode(prompt, return_tensors="pt")
-
-attention_mask = input_ids.ne(0).long()
-
-output = model.generate(
-    input_ids,
-    max_length=50,
-    num_return_sequences=1,
-    attention_mask=attention_mask,
-    pad_token_id=tokenizer.eos_token_id,
-)
-
-print(tokenizer.decode(output[0], skip_special_tokens=True))
+for i, sample_output in enumerate(output):
+    print(f"{i+1}: {sample_output['generated_text']}")
+    print("--------------------------------------------------")
