@@ -55,7 +55,7 @@ class MainWindow:
         input_frame.pack(pady=(5, 10), padx=(25, 25))
 
         # Model selector
-        self.model_selector = ttk.Combobox(input_frame, values=MODELS, width=7)
+        self.model_selector = ttk.Combobox(input_frame, values=MODELS, width=10)
         self.model_selector.set(MODELS[0])
         self.model_selector.grid(row=0, column=0, padx=(0, 10))
 
