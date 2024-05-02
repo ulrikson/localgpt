@@ -13,8 +13,6 @@ MODELS = [
     "haiku",
     "gpt-3.5",
     "sonar",
-    "mistral",
-    "codellama",
 ]
 
 TASKS = ["pm_assistant", "message_assistant", "email_assistant", "sales_assistant"]
