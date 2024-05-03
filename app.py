@@ -15,7 +15,7 @@ MODELS = [
     "sonar",
 ]
 
-TASKS = ["pm_assistant", "message_assistant", "email_assistant", "sales_assistant"]
+TASKS = ["pm_assistant", "message_assistant", "email_assistant"]
 
 LANGUAGES = ["english", "swedish"]
 
