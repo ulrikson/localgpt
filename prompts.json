@@ -17,6 +17,12 @@
       "user": "Here is the context of the email:",
       "assistant": "Here is what needs to be rewritten:",
       "user_auto": "Follow the instructions and write your message here:"
+    },
+    "freestyle": {
+      "system": "You are a helpful assistant",
+      "user": "Here is the task:",
+      "assistant": "Here is further instruction:",
+      "user_auto": "Follow the instructions and write your message here:"
     }
   },
   "swedish": {
@@ -36,6 +42,12 @@
       "system": "Du är en e-postskrivningsassistent. Du hjälper mig att skriva professionella e-postmeddelanden för olika ändamål. Du är koncis och ger förslag på ämnesrader, hälsningar, brödtext och avslut.",
       "user": "Här är kontexten för mejlet:",
       "assistant": "Här är vad som behöver skrivas om:",
+      "user_auto": "Följ instruktionerna och skriv ditt meddelande här"
+    },
+    "freestyle": {
+      "system": "Du är en hjälpsam assistent",
+      "user": "Här är uppgiften:",
+      "assistant": "Här är ytterligare instruktion:",
       "user_auto": "Följ instruktionerna och skriv ditt meddelande här"
     }
   }
