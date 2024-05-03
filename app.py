@@ -2,22 +2,11 @@ import tkinter as tk
 from tkinter import ttk
 from claude import claude_completion
 from open_ai import open_ai_completion
-
-MODELS = [
-    "llama3-8b",
-    "gpt-4",
-    "sonnet",
-    "opus",
-    "llama3-70b",
-    "mixtral",
-    "haiku",
-    "gpt-3.5",
-    "sonar",
-]
+from helper import MODEL_DICT
 
 TASKS = ["pm_assistant", "message_assistant", "email_assistant", "freestyle"]
-
 LANGUAGES = ["english", "swedish"]
+MODELS = list(MODEL_DICT.keys())
 
 
 class TextEntry:
@@ -122,7 +111,7 @@ class MainWindow:
 
     def copy_text(self):
         output_text = self.output_entry.get_text()
-        copy_text = output_text.split("---")[0] # Remove the metadata
+        copy_text = output_text.split("---")[0]  # Remove the metadata
 
         self.output_entry.entry.clipboard_clear()
         self.output_entry.entry.clipboard_append(copy_text)
