@@ -1,6 +1,11 @@
 import json
 
 MODEL_DICT = {
+    "gpt-4o": {
+        "model": "gpt-4o",
+        "input_cost": 5,
+        "output_cost": 15,
+    },
     "llama3-8b": {
         "model": "llama-3-8b-instruct",
         "input_cost": 0.20,
@@ -11,7 +16,7 @@ MODEL_DICT = {
         "input_cost": 0.25,
         "output_cost": 1.25,
     },
-    "gpt-4": {
+    "gpt-4-turbo": {
         "model": "gpt-4-turbo-preview",
         "input_cost": 10,
         "output_cost": 30,

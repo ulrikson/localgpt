@@ -7,7 +7,7 @@ load_dotenv()
 
 
 def get_api(model_name):
-    if model_name == "gpt-4" or model_name == "gpt-3.5":
+    if "gpt" in model_name:
         return os.getenv("OPENAI_API_KEY"), "https://api.openai.com/v1"
 
     return os.getenv("PERPLEXITY_API_KEY"), "https://api.perplexity.ai"
